@@ -317,13 +317,26 @@ function canMove() {
     return false;
 }
 
-function showGameOver() {
+async function showGameOver() {
     document.getElementById("finalScore").innerText = score;
     document.getElementById("gameOverModal").classList.remove("hidden");
     document.getElementById("restartBtn").style.display = "none";
     document.getElementById("mainContent").classList.add("blur");
     gameStarted = false;
-}
+
+    // PUBLIC leaderboard
+    await submitPublicScore(score);
+
+    // Load global leaderboard
+    const scores = await loadPublicLeaderboard();
+
+    // Update "Your current score + rank"
+    let rank = scores.indexOf(score) + 1;
+    if (rank < 1) rank = scores.length;
+
+    const ys = document.getElementById("yourScore");
+    ys.textContent = `Your current score: ${score} (Rank: #${rank})`;
+                                                              }
 
 function hideGameOver() {
     document.getElementById("gameOverModal").classList.add("hidden");
@@ -380,4 +393,5 @@ async function loadPublicLeaderboard() {
         return [];
     }
 }
+
 
