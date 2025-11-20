@@ -1,37 +1,28 @@
-import fs from "fs";
-import path from "path";
+import { Pool } from "pg";
 
-export default function handler(req, res) {
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+});
+
+export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ error: "POST only" });
     }
 
-    const filePath = path.join("/tmp", "leaderboard.json");
-
-    // Extract score
     const { score } = req.body;
 
-    if (typeof score !== "number" || score <= 0) {
+    if (!score || typeof score !== "number") {
         return res.status(400).json({ error: "Invalid score" });
     }
 
-    // Load existing scores
-    let scores = [];
-    if (fs.existsSync(filePath)) {
-        try {
-            const data = fs.readFileSync(filePath, "utf8");
-            scores = JSON.parse(data);
-        } catch {
-            scores = [];
-        }
+    try {
+        await pool.query(
+            "INSERT INTO leaderboard (score) VALUES ($1)",
+            [score]
+        );
+        res.json({ success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Database error" });
     }
-
-    // Add + sort + limit
-    scores.push(score);
-    scores = scores.sort((a, b) => b - a).slice(0, 50);
-
-    // Save updated leaderboard
-    fs.writeFileSync(filePath, JSON.stringify(scores), "utf8");
-
-    return res.json({ success: true, scores });
 }
