@@ -1,23 +1,19 @@
-import fs from "fs";
-import path from "path";
+import { Pool } from "pg";
 
-export default function handler(req, res) {
-    const filePath = path.join("/tmp", "leaderboard.json");
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+});
 
-    // If no file yet, return empty list
-    if (!fs.existsSync(filePath)) {
-        return res.json({ scores: [] });
-    }
-
+export default async function handler(req, res) {
     try {
-        const fileData = fs.readFileSync(filePath, "utf8");
-        let scores = JSON.parse(fileData);
+        const result = await pool.query(
+            "SELECT score FROM leaderboard ORDER BY score DESC LIMIT 50"
+        );
 
-        // Sort descending + top 50
-        scores = scores.sort((a, b) => b - a).slice(0, 50);
-
-        return res.json({ scores });
-    } catch (e) {
-        return res.json({ scores: [] });
+        const scores = result.rows.map(r => r.score);
+        res.json({ scores });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Database error" });
     }
 }
