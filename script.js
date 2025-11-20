@@ -347,4 +347,37 @@ function spawnEmoji() {
 }
 
 setInterval(spawnEmoji, 1200);
+async function submitPublicScore(score) {
+    try {
+        await fetch("/api/submit-score", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ score })
+        });
+    } catch (e) {
+        console.error("Submit failed:", e);
+    }
+}
+
+async function loadPublicLeaderboard() {
+    try {
+        const res = await fetch("/api/get-leaderboard");
+        const data = await res.json();
+        const scores = data.scores || [];
+
+        const lb = document.getElementById("leaderboard");
+        lb.innerHTML = "";
+
+        scores.forEach((s, i) => {
+            const li = document.createElement("li");
+            li.textContent = `#${i + 1} — ${s}`;
+            lb.appendChild(li);
+        });
+
+        return scores;
+    } catch (e) {
+        console.error("Load failed:", e);
+        return [];
+    }
+}
 
