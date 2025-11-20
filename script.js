@@ -374,11 +374,13 @@ async function submitPublicScore(score) {
     try {
         await fetch("/api/submit-score", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({ score })
         });
-    } catch (e) {
-        console.error("Error submitting score:", e);
+    } catch (err) {
+        console.error("Submit error:", err);
     }
 }
 
@@ -398,10 +400,11 @@ async function loadPublicLeaderboard() {
                 lb.appendChild(li);
             });
         }
+
         return scores;
 
-    } catch (e) {
-        console.error("Error loading leaderboard:", e);
+    } catch (err) {
+        console.error("Load error:", err);
         return [];
     }
 }
