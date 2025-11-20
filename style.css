@@ -366,3 +366,94 @@ footer#emojiFooter {
 body {
     padding-bottom: 20px;
 }
+
+/* ============================================
+   PUBLIC LEADERBOARD (TOP 50)
+   ============================================ */
+
+#leaderboardBox {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    width: 350px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+#leaderboardBox h3 {
+    margin: 0 0 14px 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 0 8px #000;
+}
+
+/* Scrollable list */
+#leaderboard {
+    max-height: 220px;   /* fits ~7 rows */
+    overflow-y: auto;
+    padding-right: 10px;
+    text-align: left;
+}
+
+/* Scrollbar */
+#leaderboard {
+    scrollbar-width: thin;
+    scrollbar-color: #ffd700 #444;
+}
+#leaderboard::-webkit-scrollbar {
+    width: 6px;
+}
+#leaderboard::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 10px;
+}
+#leaderboard::-webkit-scrollbar-track {
+    background: #444;
+}
+
+/* Leaderboard rows */
+#leaderboard li {
+    margin: 6px 0;
+    font-size: 1.15rem;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+
+    /* Animation */
+    animation: slideIn 0.4s ease forwards;
+    opacity: 0;
+    transform: translateX(-8px);
+}
+
+/* Slide effect */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Glow effect for rank #1 */
+#leaderboard li:first-child {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 14px #ffd700, 0 0 30px #ffb300;
+    background: rgba(255, 215, 0, 0.12);
+    border-left: 4px solid #ffd700;
+}
+
+/* Current score text */
+#yourScore {
+    margin-top: 12px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: #ffd700;
+    text-shadow: 0 0 6px #000;
+    }
