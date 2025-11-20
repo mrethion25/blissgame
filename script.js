@@ -6,7 +6,6 @@ var highScore = 0;
 var gameStarted = false;
 
 window.onload = function() {
-    ...
     loadPublicLeaderboard(); // Load public leaderboard when page loads
 };
     // Load highScore from localStorage
@@ -339,8 +338,7 @@ async function showGameOver() {
 
     const ys = document.getElementById("yourScore");
     ys.textContent = `Your current score: ${score} (Rank: #${rank})`;
-                                                              }
-
+         }
 function hideGameOver() {
     document.getElementById("gameOverModal").classList.add("hidden");
     document.getElementById("mainContent").classList.remove("blur");
@@ -396,6 +394,7 @@ async function loadPublicLeaderboard() {
         return [];
     }
 }
+
 
 
 
