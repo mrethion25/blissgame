@@ -1,0 +1,11 @@
+{
+  "name": "blissgame-2048",
+  "version": "1.0.0",
+  "description": "2048 Game with global leaderboard",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}
