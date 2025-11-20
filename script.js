@@ -331,7 +331,7 @@ function hideGameOver() {
 }
 
 // --- Emoji Footer Animation ---
-const emojiList = ["made", "with", "❤️", "by", "team", "bliss", "💖", "🌟", "😎", "🙌", "🦄", "🍀", "🔥", "💯", "🤩"];
+const emojiList = ["🦄", "🦅", "❤️", "👀", "💗", "💅🏻", "💖", "🌟", "😎", "🙌", "🎮", "🍀", "🔥", "💯", "🤩"];
 const footer = document.getElementById("emojiFooter");
 
 function spawnEmoji() {
@@ -347,3 +347,4 @@ function spawnEmoji() {
 }
 
 setInterval(spawnEmoji, 1200);
+
