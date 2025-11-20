@@ -6,6 +6,9 @@ var highScore = 0;
 var gameStarted = false;
 
 window.onload = function() {
+    ...
+    loadPublicLeaderboard(); // Load public leaderboard when page loads
+};
     // Load highScore from localStorage
     highScore = Number(localStorage.getItem("2048-highScore")) || 0;
     document.getElementById("highScore").innerText = highScore;
@@ -393,6 +396,7 @@ async function loadPublicLeaderboard() {
         return [];
     }
 }
+
 
 
 
