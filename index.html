@@ -16,10 +16,22 @@
             &nbsp;|&nbsp;
             top Score: <span id="highScore">0</span>
         </h2>
+
+        <!-- ⭐ PUBLIC LEADERBOARD ⭐ -->
+        <div id="leaderboardBox">
+            <h3>Leaderboard (Top 50)</h3>
+            <ol id="leaderboard"></ol>
+            <p id="yourScore"></p>
+        </div>
+        <!-- ⭐ END LEADERBOARD ⭐ -->
+
         <div id="board"></div>
+
         <button id="startBtn">Start Game</button>
         <button id="restartBtn" style="display:none;">Restart</button>
     </div>
+
+    <!-- HINT POPUP -->
     <div id="hintPop" class="hint-pop hidden">
         <div class="hint-content">
             <div class="arrows arrows-keyboard">
@@ -40,6 +52,8 @@
             <button id="hintOkBtn">OK</button>
         </div>
     </div>
+
+    <!-- GAME OVER MODAL -->
     <div id="gameOverModal" class="modal hidden">
         <div class="modal-content">
             <h2>Game Over!</h2>
@@ -51,6 +65,9 @@
     <!-- AD CODE -->
     <script async="async" data-cfasync="false" src="//pl28097681.effectivegatecpm.com/43d5e6dc0527efa68f024f2dedcbce2f/invoke.js"></script>
     <div id="container-43d5e6dc0527efa68f024f2dedcbce2f"></div>
+
+    <!-- EMOJI FOOTER -->
+    <footer id="emojiFooter"></footer>
 
 </body>
 </html>
